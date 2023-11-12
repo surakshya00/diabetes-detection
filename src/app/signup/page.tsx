@@ -1,6 +1,7 @@
 "use client"
 import { Box, Button, Center, Divider, Input, InputGroup, InputRightElement, Stack } from "@chakra-ui/react";
 import React from "react";
+import NextLink from 'next/link'
 
 
 export default function Signup() {
@@ -28,7 +29,9 @@ export default function Signup() {
           </InputGroup>
           <Button colorScheme='teal'>Sign Up</Button>
           <Divider orientation='horizontal' />
-          <Button colorScheme='teal' variant={"link"}>Existing User? Log in</Button>
+          <NextLink href="/login" passHref>
+          <Button colorScheme='teal' mx={"auto"} display={"block"} variant={"link"}>Existing User? Log in</Button>
+          </NextLink>
         </Stack>
       </Box>
 
