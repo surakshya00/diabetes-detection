@@ -13,8 +13,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import NextLink from "next/link";
-import Introduction from "./intro";
+import Introduction from "../components/diabetes-intro";
 
 export default function Home() {
   return (
