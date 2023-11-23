@@ -5,6 +5,7 @@ import {
   Center,
   Divider,
   Grid,
+  GridItem,
   Heading,
   Input,
   InputGroup,
@@ -14,6 +15,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import Introduction from "../components/diabetes-intro";
+import ResultSummary from "../components/result-summary";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 export default function Home() {
   return (
@@ -29,7 +32,27 @@ export default function Home() {
           <Introduction />
         </Box>
 
-        <Box py="50" bgColor="gray.800" w="100%" borderRadius="lg"></Box>
+        <Grid templateColumns="1fr" gap="5">
+          <GridItem w="100%" rowSpan={6}>
+            <ResultSummary />
+          </GridItem>
+
+          <GridItem
+            py="50"
+            bgColor="gray.800"
+            w="100%"
+            borderRadius="lg"
+            rowSpan={1}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            cursor="pointer"
+          >
+            <Heading>
+              Determine Risk <ArrowForwardIcon />
+            </Heading>
+          </GridItem>
+        </Grid>
       </Grid>
     </Box>
   );

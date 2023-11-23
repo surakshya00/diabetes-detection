@@ -19,7 +19,7 @@ export async function GET() {
   }
 
   return Response.json(
-    { message: "no result found" },
+    { message: "No result found" },
     {
       status: 404,
     }
