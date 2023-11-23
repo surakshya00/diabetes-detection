@@ -49,7 +49,7 @@ export default function Home() {
             cursor="pointer"
           >
             <Heading>
-              Determine Risk <ArrowForwardIcon />
+              Predict Risk <ArrowForwardIcon />
             </Heading>
           </GridItem>
         </Grid>

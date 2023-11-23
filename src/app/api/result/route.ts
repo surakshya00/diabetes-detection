@@ -1,11 +1,10 @@
-const testHasMockData = false;
-const testHasDiabetes = false;
+const testHasMockData = true;
 
 async function getMockDiabetesResult() {
   if (testHasMockData) {
     return {
-      hasDiabetes: testHasDiabetes,
-      generatedTimestamp: new Date().toISOString(),
+      hasDiabetes: Math.random() < 0.5,
+      timestamp: new Date().toISOString(),
     };
   }
 

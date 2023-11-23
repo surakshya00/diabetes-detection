@@ -1,3 +1,8 @@
+export interface DiabetesResult {
+  hasDiabetes: Boolean;
+  timestamp: string;
+}
+
 export async function GetLatestResult() {
   const response = await fetch("/api/result");
   if (response) {
@@ -5,7 +10,7 @@ export async function GetLatestResult() {
     if (!response.ok) {
       throw responseData?.message || "failed to get latest result";
     }
-    return responseData;
+    return responseData.result as DiabetesResult;
   }
   throw "failed to get latest result";
 }
