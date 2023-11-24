@@ -7,18 +7,20 @@ import { useQuery } from "@tanstack/react-query";
 
 function getColorScheme(error: Error | null, data: any) {
   const result = {
-    bgColor: "gray.800",
+    bgGradient: "linear(to-l, gray.800, gray.700)",
     textColor: "white",
   };
 
   if (error) {
-    result.bgColor = "orange.400";
+    result.bgGradient = "linear(to-tr, orange.400, orange.600)";
     result.textColor = "black";
     return result;
   }
 
   if (data) {
-    result.bgColor = data.hasDiabetes ? "red.600" : "green.600";
+    result.bgGradient = data.hasDiabetes
+      ? "linear(to-l, red.700, red.500)"
+      : "linear(to-l, green.600, green.400)";
   }
 
   return result;
@@ -45,7 +47,7 @@ export default function ResultSummary() {
     retry: false,
   });
 
-  const { bgColor, textColor } = getColorScheme(error, data);
+  const { bgGradient, textColor } = getColorScheme(error, data);
 
   return (
     <Box
@@ -54,7 +56,7 @@ export default function ResultSummary() {
       alignItems="center"
       flexDir="column"
       h="100%"
-      bgColor={bgColor}
+      bgGradient={bgGradient}
       textColor={textColor}
       borderRadius="lg"
     >
@@ -85,7 +87,7 @@ export default function ResultSummary() {
         </>
       )}
 
-      {data && (
+      {!error && data && (
         <>
           {data.hasDiabetes ? (
             <CloseIcon fontSize="4xl" />

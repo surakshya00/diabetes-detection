@@ -29,7 +29,12 @@ export default function Home() {
       <Divider borderColor="gray.400" w="100%" maxW="400px" my="5" />
 
       <Grid templateColumns={{ base: "1fr", md: "3fr 2fr" }} gap="5">
-        <Box p="5" bgColor="gray.700" w="100%" borderRadius="lg">
+        <Box
+          p="5"
+          bgGradient="linear(to-r, gray.700, gray.600)"
+          w="100%"
+          borderRadius="lg"
+        >
           <Introduction />
         </Box>
 
@@ -40,7 +45,7 @@ export default function Home() {
 
           <GridItem
             py="50"
-            bgColor="gray.800"
+            bgGradient="linear(to-l, blue.500, blue.400)"
             w="100%"
             borderRadius="lg"
             rowSpan={1}
@@ -56,7 +61,7 @@ export default function Home() {
         </Grid>
       </Grid>
 
-      <Box mt="5">
+      <Box mt={[5, null, "50px"]}>
         <Heading size="md">Diabetes Discoveries and Practice</Heading>
         <DiabetesFeed />
       </Box>
