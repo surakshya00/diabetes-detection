@@ -65,12 +65,24 @@ export default function Home() {
           <Heading size="md" textAlign="center" my="5">
             Get Started
           </Heading>
-          <Button display="block" colorScheme="teal" w="100%" my="3">
-            <NextLink href="/login">Log In</NextLink>
-          </Button>
-          <Button display="block" colorScheme="teal" w="100%" my="3">
-            <NextLink href="/signup">Sign Up</NextLink>
-          </Button>
+          <Box w="100%" my="3">
+            <NextLink href="/login" style={{ width: "100%", display: "block" }}>
+              <Button display="block" colorScheme="teal" w="100%">
+                Log In
+              </Button>
+            </NextLink>
+          </Box>
+
+          <Box w="100%" my="3">
+            <NextLink
+              href="/signup"
+              style={{ width: "100%", display: "block" }}
+            >
+              <Button display="block" colorScheme="teal" w="100%">
+                Sign Up
+              </Button>
+            </NextLink>
+          </Box>
         </Box>
       </Grid>
     </Box>
