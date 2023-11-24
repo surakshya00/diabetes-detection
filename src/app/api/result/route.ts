@@ -1,3 +1,5 @@
+import { authenticateUser } from "@/app/middleware/auth";
+
 const testHasMockData = true;
 
 async function getMockDiabetesResult() {
@@ -12,15 +14,17 @@ async function getMockDiabetesResult() {
 }
 
 export async function GET() {
-  const data = await getMockDiabetesResult();
-  if (data) {
-    return Response.json({ result: data });
-  }
-
-  return Response.json(
-    { message: "No result found" },
-    {
-      status: 404,
+  return await authenticateUser(async (_) => {
+    const data = await getMockDiabetesResult();
+    if (data) {
+      return Response.json({ result: data });
     }
-  );
+
+    return Response.json(
+      { message: "No result found" },
+      {
+        status: 404,
+      }
+    );
+  });
 }
