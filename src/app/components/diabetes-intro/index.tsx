@@ -31,7 +31,7 @@ export default function Introduction() {
         Types of Diabetes
       </Heading>
 
-      <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={5} my="5">
+      <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={5} mt="5">
         <TypeDetails
           title="Type 1 Diabetes"
           description="This occurs when the immune system mistakenly attacks and destroys
