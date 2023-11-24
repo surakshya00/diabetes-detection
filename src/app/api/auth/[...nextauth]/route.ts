@@ -1,3 +1,6 @@
+import dbConnect from "@/lib/db";
+import { isMatchingPassword } from "@/lib/password";
+import User from "@/models/User";
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -6,24 +9,40 @@ const authOptions: AuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
+        username: { label: "email", type: "text", placeholder: "jsmith" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
+        if (!credentials) {
           return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
+
+        const { username, password } = credentials;
+
+        await dbConnect();
+        const existingUser = await User.findOne({ email: username });
+        if (!existingUser) {
+          console.error("no user found for given email");
+          return null;
+        }
+
+        const isCorrectPassword = await isMatchingPassword(
+          password,
+          existingUser.passwordHash
+        );
+
+        if (!isCorrectPassword) {
+          console.error("invalid credentials");
+          return null;
+        }
+
+        return existingUser;
       },
     }),
   ],
+  session: {
+    maxAge: 6 * 60 * 60,
+  },
   pages: {
     signIn: "/login",
     newUser: "/signup",

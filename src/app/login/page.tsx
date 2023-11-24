@@ -7,19 +7,66 @@ import {
   InputGroup,
   InputRightElement,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import NextLink from "next/link";
-import { getCsrfToken } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 export default function Login() {
   const [show, setShow] = React.useState(false);
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
+
+  const searchParams = useSearchParams();
+  const toast = useToast();
+
+  useEffect(() => {
+    const errorCode = searchParams.get("error");
+    switch (errorCode) {
+      case "CredentialsSignin":
+        setError("Invalid email/password credentials");
+        break;
+      default:
+        setError("");
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Login failed",
+        description: error,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  }, [error, toast]);
+
   const handleClick = () => setShow(!show);
 
-  const [csrfToken, setCsrfToken] = React.useState("");
-  useEffect(() => {
-    getCsrfToken().then((token) => setCsrfToken(token || ""));
-  });
+  const handleLogin = () => {
+    setLoading(true);
+    signIn("credentials", {
+      username,
+      password,
+      callbackUrl: "/dashboard",
+    })
+      .then(() => {
+        toast({
+          title: "Login Success",
+          description: "Successfully logged in",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      })
+      .finally(() => setLoading(false));
+  };
 
   return (
     <main>
@@ -39,12 +86,13 @@ export default function Login() {
           p={5}
           borderRadius={"lg"}
         >
-          <Box as="form" method="post" action="/api/auth/callback/credentials">
-            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+          <Box>
             <Input
               variant="outline"
               placeholder="Enter email"
               name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               size="lg"
               color="white"
               mb="3"
@@ -56,6 +104,8 @@ export default function Login() {
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
                 color="white"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -63,7 +113,12 @@ export default function Login() {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <Button colorScheme="teal" type="submit" w="100%">
+            <Button
+              colorScheme="teal"
+              w="100%"
+              onClick={handleLogin}
+              isLoading={loading}
+            >
               Log in
             </Button>
           </Box>
