@@ -17,10 +17,11 @@ import React from "react";
 import Introduction from "../components/diabetes-intro";
 import ResultSummary from "../components/result-summary";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import DiabetesFeed from "../components/diabetes-feed";
 
 export default function Home() {
   return (
-    <Box as="main" bgColor="#121212" textColor="white" p="5" minH="100vh">
+    <Box as="main" bgColor="#121212" color="white" p="5" minH="100vh">
       <Box mt="5">
         <Heading>Diabetes Detector</Heading>
       </Box>
@@ -54,6 +55,11 @@ export default function Home() {
           </GridItem>
         </Grid>
       </Grid>
+
+      <Box mt="5">
+        <Heading size="md">Diabetes Discoveries and Practice</Heading>
+        <DiabetesFeed />
+      </Box>
     </Box>
   );
 }
