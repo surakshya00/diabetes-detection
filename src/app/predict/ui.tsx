@@ -55,7 +55,9 @@ export default function PredictUI() {
         py="2"
         borderRadius="lg"
       >
-        <Heading>Health</Heading>
+        <Heading textAlign="center" mb="3">
+          Health
+        </Heading>
         <Grid
           templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
           gap={5}
@@ -141,7 +143,9 @@ export default function PredictUI() {
         py="2"
         borderRadius="lg"
       >
-        <Heading size="lg">Lifestyle</Heading>
+        <Heading textAlign="center" mb="3">
+          Lifestyle
+        </Heading>
         <Grid
           templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
           gap={5}
@@ -237,7 +241,9 @@ export default function PredictUI() {
         py="2"
         borderRadius="lg"
       >
-        <Heading>Healthcare</Heading>
+        <Heading textAlign="center" mb="3">
+          Healthcare
+        </Heading>
         <Grid
           templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
           gap={5}
@@ -271,7 +277,9 @@ export default function PredictUI() {
         py="2"
         borderRadius="lg"
       >
-        <Heading>Demographics</Heading>
+        <Heading textAlign="center" mb="3">
+          Demographics
+        </Heading>
         <Grid
           templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
           gap={5}
