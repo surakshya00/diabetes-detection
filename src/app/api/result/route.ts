@@ -1,5 +1,3 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
 import { authenticateUser } from "@/app/middleware/auth";
 
 const testHasMockData = true;
