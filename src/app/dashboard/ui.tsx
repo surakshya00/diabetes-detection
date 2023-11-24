@@ -13,6 +13,7 @@ import ResultSummary from "../components/result-summary";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import DiabetesFeed from "../components/diabetes-feed";
 import { signOut } from "next-auth/react";
+import NextLink from "next/link";
 
 export default function DashboardUI() {
   return (
@@ -51,6 +52,8 @@ export default function DashboardUI() {
           </GridItem>
 
           <GridItem
+            as={NextLink}
+            href="/predict"
             py="50"
             bgGradient="linear(to-l, blue.500, blue.400)"
             w="100%"
