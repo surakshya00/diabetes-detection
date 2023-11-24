@@ -5,7 +5,7 @@ import { Providers } from "./provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Diabetes Detection",
+  title: "Diabetes Detector",
   description: "Web app that determines if you are at risk for Diabetes",
 };
 
