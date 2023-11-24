@@ -4,7 +4,7 @@ declare global {
 }
 
 const MONGODB_URI = process.env.MONGODB_URI!;
-const MONGODB_NAME = process.env.MONDODB_NAME || "test";
+const MONGODB_NAME = process.env.MONGODB_NAME || "test";
 
 if (!MONGODB_URI) {
   throw new Error(
