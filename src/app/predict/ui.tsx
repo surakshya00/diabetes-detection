@@ -6,7 +6,6 @@ import {
   Button,
   Grid,
   Input,
-  InputGroup,
   Radio,
   RadioGroup,
   Stack,
@@ -14,11 +13,15 @@ import {
   Link,
   Heading,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import FormTile from "./tile";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { predictDiabetes } from "../actions/predict";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 interface IFormInput {
   highBP: string;
@@ -48,6 +51,10 @@ const errorBoxShadow =
   "0 10px 15px -3px rgb(255 0 0 / 30%), 0 4px 6px -2px rgb(255 0 0 / 50%)";
 
 export default function PredictUI() {
+  const toast = useToast();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
   const [loading, setLoading] = useState(false);
 
   const {
@@ -59,10 +66,24 @@ export default function PredictUI() {
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     setLoading(true);
     const payload = parseUserForm(data);
-    alert(JSON.stringify(payload, null, 2));
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+    predictDiabetes(payload)
+      .then((result) => {
+        alert(JSON.stringify(result, null, 2));
+        queryClient.invalidateQueries({ queryKey: ["diabetesResult"] });
+        router.push("/dashboard");
+      })
+      .catch((e) => {
+        toast({
+          title: "Error",
+          description: String(e) || "Failed to run prediction",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
