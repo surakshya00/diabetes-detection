@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Stat,
-  StatHelpText,
-  StatLabel,
-  StatNumber,
-} from "@chakra-ui/react";
+import { Box, Stat, StatHelpText, StatNumber } from "@chakra-ui/react";
 
 interface StatsProps {
   label: String;
