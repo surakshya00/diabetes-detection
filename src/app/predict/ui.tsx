@@ -14,6 +14,7 @@ import {
   Heading,
   Select,
   useToast,
+  useDisclosure,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import FormTile from "./tile";
@@ -22,6 +23,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { predictDiabetes } from "../actions/predict";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import PredictionModal from "./result";
 
 interface IFormInput {
   highBP: string;
@@ -54,7 +56,9 @@ export default function PredictUI() {
   const toast = useToast();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [hasDiabetes, setHasDiabetes] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const {
@@ -68,9 +72,9 @@ export default function PredictUI() {
     const payload = parseUserForm(data);
     predictDiabetes(payload)
       .then((result) => {
-        alert(JSON.stringify(result, null, 2));
         queryClient.invalidateQueries({ queryKey: ["diabetesResult"] });
-        router.push("/dashboard");
+        setHasDiabetes(result.hasDiabetes);
+        onOpen();
       })
       .catch((e) => {
         toast({
@@ -86,8 +90,18 @@ export default function PredictUI() {
       });
   };
 
+  const onModalClose = () => {
+    router.push("/dashboard");
+    onClose();
+  };
+
   return (
     <Box as="main" bgColor="#121212" color="white" p="5" minH="100vh">
+      <PredictionModal
+        isOpen={isOpen}
+        onClose={onModalClose}
+        hasDiabetes={hasDiabetes}
+      />
       <Box as="form" onSubmit={handleSubmit(onSubmit)}>
         <Button
           as={NextLink}
