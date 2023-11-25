@@ -2,7 +2,7 @@
 
 import { GetLatestResult } from "@/app/actions/summary";
 import { CheckIcon, CloseIcon, InfoOutlineIcon } from "@chakra-ui/icons";
-import { Box, Heading, Spinner, Text } from "@chakra-ui/react";
+import { Box, ListItem, Spinner, Text, UnorderedList } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 
 function getColorScheme(error: Error | null, data: any) {
@@ -62,14 +62,7 @@ export default function ResultSummary() {
     >
       {isPending && (
         <>
-          <Spinner
-            size="xl"
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            mx="auto"
-          />
+          <Spinner size="xl" thickness="4px" speed="0.65s" mx="auto" />
 
           <Text fontSize="xl" my="5">
             Getting latest result
@@ -84,6 +77,17 @@ export default function ResultSummary() {
           <Text fontSize="xl" my="5">
             {String(error) || "Failed to get result"}
           </Text>
+
+          <UnorderedList fontSize="xs" textAlign="left">
+            <ListItem>Ensure you are logged in</ListItem>
+            <ListItem>
+              Ensure you have completed prediction quiz at least one
+            </ListItem>
+            <ListItem>
+              If the problem still persists, please try again later or contact
+              Admin
+            </ListItem>
+          </UnorderedList>
         </>
       )}
 

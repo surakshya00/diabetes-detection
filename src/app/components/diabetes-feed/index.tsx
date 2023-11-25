@@ -1,5 +1,5 @@
 import { GetDiabetesNewsFeed } from "@/app/actions/feed";
-import { Box, Button, SimpleGrid, Skeleton, Text } from "@chakra-ui/react";
+import { Box, Button, SimpleGrid, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import PlaceholderCell from "./placeholder";
 import { NotAllowedIcon } from "@chakra-ui/icons";

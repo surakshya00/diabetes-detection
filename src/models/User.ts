@@ -5,6 +5,10 @@ export interface Users extends mongoose.Document {
   lastName: string;
   email: string;
   passwordHash: string;
+  diabetesResult: {
+    hasDiabetes: boolean;
+    timestamp: string;
+  };
 }
 
 const UserSchema = new mongoose.Schema<Users>({
@@ -25,6 +29,14 @@ const UserSchema = new mongoose.Schema<Users>({
   passwordHash: {
     type: String,
     required: [true, "Please provide the password hash for this user"],
+  },
+  diabetesResult: {
+    hasDiabetes: {
+      type: Boolean,
+    },
+    timestamp: {
+      type: String,
+    },
   },
 });
 

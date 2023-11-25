@@ -1,5 +1,5 @@
 export interface DiabetesResult {
-  hasDiabetes: Boolean;
+  hasDiabetes: boolean;
   timestamp: string;
 }
 
