@@ -2,15 +2,7 @@
 
 import { GetLatestResult } from "@/app/actions/summary";
 import { CheckIcon, CloseIcon, InfoOutlineIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Heading,
-  ListItem,
-  OrderedList,
-  Spinner,
-  Text,
-  UnorderedList,
-} from "@chakra-ui/react";
+import { Box, ListItem, Spinner, Text, UnorderedList } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 
 function getColorScheme(error: Error | null, data: any) {
@@ -70,14 +62,7 @@ export default function ResultSummary() {
     >
       {isPending && (
         <>
-          <Spinner
-            size="xl"
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            mx="auto"
-          />
+          <Spinner size="xl" thickness="4px" speed="0.65s" mx="auto" />
 
           <Text fontSize="xl" my="5">
             Getting latest result
