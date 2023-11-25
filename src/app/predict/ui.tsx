@@ -437,8 +437,6 @@ export default function PredictUI() {
             >
               <Input
                 type="number"
-                min="1"
-                max="30"
                 placeholder="Total Days"
                 {...register("physHlth", {
                   required: true,
