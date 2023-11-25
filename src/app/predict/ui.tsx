@@ -58,13 +58,12 @@ export default function PredictUI() {
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     setLoading(true);
-    console.log(data);
+    const payload = parseUserForm(data);
+    alert(JSON.stringify(payload, null, 2));
     setTimeout(() => {
       setLoading(false);
     }, 5000);
   };
-
-  console.log(errors);
 
   return (
     <Box as="main" bgColor="#121212" color="white" p="5" minH="100vh">
@@ -638,4 +637,12 @@ export default function PredictUI() {
       </Box>
     </Box>
   );
+}
+
+function parseUserForm(data: IFormInput) {
+  const result: { [key: string]: number } = {};
+  Object.entries(data).forEach(([key, value]) => {
+    result[key] = Number(value);
+  });
+  return result;
 }
