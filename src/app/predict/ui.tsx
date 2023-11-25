@@ -36,6 +36,8 @@ interface IFormInput {
   diffWalk: string;
   mentHlth: number;
   physHlth: number;
+  anyHealthcare: string;
+  noDocBcCost: string;
 }
 
 const errorBoxShadow =
@@ -448,20 +450,46 @@ export default function PredictUI() {
             gap={5}
             my="5"
           >
-            <FormTile question="Do you have any kind of health care coverage?">
-              <RadioGroup name="anyHealthcare">
+            <FormTile
+              question="Do you have any kind of health care coverage?"
+              boxShadow={errors.anyHealthcare ? errorBoxShadow : ""}
+            >
+              <RadioGroup>
                 <Stack>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
+                  <Radio
+                    {...register("anyHealthcare", { required: true })}
+                    value="1"
+                  >
+                    Yes
+                  </Radio>
+                  <Radio
+                    {...register("anyHealthcare", { required: true })}
+                    value="0"
+                  >
+                    No
+                  </Radio>
                 </Stack>
               </RadioGroup>
             </FormTile>
 
-            <FormTile question="Was there a time in the past 12 months when you needed to see a doctor but could not because of cost?">
-              <RadioGroup name="noDocBcCost">
+            <FormTile
+              question="Was there a time in the past 12 months when you needed to see a doctor but could not because of cost?"
+              boxShadow={errors.noDocBcCost ? errorBoxShadow : ""}
+            >
+              <RadioGroup>
                 <Stack>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
+                  <Radio
+                    {...register("noDocBcCost", { required: true })}
+                    value="1"
+                  >
+                    Yes
+                  </Radio>
+                  <Radio
+                    {...register("noDocBcCost", { required: true })}
+                    value="0"
+                  >
+                    No
+                  </Radio>
                 </Stack>
               </RadioGroup>
             </FormTile>
