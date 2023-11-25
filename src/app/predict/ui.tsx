@@ -28,6 +28,14 @@ interface IFormInput {
   stroke: string;
   heartDiseaseOrAttack: string;
   genHlth: string;
+  smoker: string;
+  physActivity: string;
+  fruits: string;
+  veggies: string;
+  hvyAlcoholConsump: string;
+  diffWalk: string;
+  mentHlth: number;
+  physHlth: number;
 }
 
 const errorBoxShadow =
@@ -258,81 +266,165 @@ export default function PredictUI() {
             gap={5}
             my="5"
           >
-            <FormTile question="Have you smoked at least 100 cigarettes in your entire life?">
-              <RadioGroup name="smoker">
+            <FormTile
+              question="Have you smoked at least 100 cigarettes in your entire life?"
+              boxShadow={errors.smoker ? errorBoxShadow : ""}
+            >
+              <RadioGroup>
                 <Stack>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
+                  <Radio {...register("smoker", { required: true })} value="1">
+                    Yes
+                  </Radio>
+                  <Radio {...register("smoker", { required: true })} value="0">
+                    No
+                  </Radio>
                 </Stack>
               </RadioGroup>
             </FormTile>
 
-            <FormTile question="Did you do any physical activity in the last 30 days (excluding job)?">
-              <RadioGroup name="physActivity">
+            <FormTile
+              question="Did you do any physical activity in the last 30 days (excluding job)?"
+              boxShadow={errors.physActivity ? errorBoxShadow : ""}
+            >
+              <RadioGroup>
                 <Stack>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
+                  <Radio
+                    {...register("physActivity", { required: true })}
+                    value="1"
+                  >
+                    Yes
+                  </Radio>
+                  <Radio
+                    {...register("physActivity", { required: true })}
+                    value="0"
+                  >
+                    No
+                  </Radio>
                 </Stack>
               </RadioGroup>
             </FormTile>
 
-            <FormTile question="Do you consume fruits at least one time a day?">
-              <RadioGroup name="fruits">
+            <FormTile
+              question="Do you consume fruits at least one time a day?"
+              boxShadow={errors.fruits ? errorBoxShadow : ""}
+            >
+              <RadioGroup>
                 <Stack>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
+                  <Radio {...register("fruits", { required: true })} value="1">
+                    Yes
+                  </Radio>
+                  <Radio {...register("fruits", { required: true })} value="0">
+                    No
+                  </Radio>
                 </Stack>
               </RadioGroup>
             </FormTile>
 
-            <FormTile question="Do you consume vegetables at least one time a day?">
-              <RadioGroup name="veggies">
+            <FormTile
+              question="Do you consume vegetables at least one time a day?"
+              boxShadow={errors.veggies ? errorBoxShadow : ""}
+            >
+              <RadioGroup>
                 <Stack>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
+                  <Radio {...register("veggies", { required: true })} value="1">
+                    Yes
+                  </Radio>
+                  <Radio {...register("veggies", { required: true })} value="0">
+                    No
+                  </Radio>
                 </Stack>
               </RadioGroup>
             </FormTile>
 
-            <FormTile question="Are you a heavy drinker?">
-              <RadioGroup name="hvyAlcoholConsump">
+            <FormTile
+              question="Are you a heavy drinker?"
+              boxShadow={errors.hvyAlcoholConsump ? errorBoxShadow : ""}
+            >
+              <RadioGroup>
                 <Stack>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
+                  <Radio
+                    {...register("hvyAlcoholConsump", { required: true })}
+                    value="1"
+                  >
+                    Yes
+                  </Radio>
+                  <Radio
+                    {...register("hvyAlcoholConsump", { required: true })}
+                    value="0"
+                  >
+                    No
+                  </Radio>
                 </Stack>
               </RadioGroup>
             </FormTile>
 
-            <FormTile question="Do you have serious difficulty walking or climbing stairs?">
-              <RadioGroup name="diffWalk">
+            <FormTile
+              question="Do you have serious difficulty walking or climbing stairs?"
+              boxShadow={errors.diffWalk ? errorBoxShadow : ""}
+            >
+              <RadioGroup>
                 <Stack>
-                  <Radio value="1">Yes</Radio>
-                  <Radio value="0">No</Radio>
+                  <Radio
+                    {...register("diffWalk", { required: true })}
+                    value="1"
+                  >
+                    Yes
+                  </Radio>
+                  <Radio
+                    {...register("diffWalk", { required: true })}
+                    value="0"
+                  >
+                    No
+                  </Radio>
                 </Stack>
               </RadioGroup>
             </FormTile>
 
-            <FormTile question="For how many days during the past 30 days was your mental health not good?">
+            <FormTile
+              question="For how many days during the past 30 days was your mental health not good?"
+              boxShadow={errors.mentHlth ? errorBoxShadow : ""}
+            >
               <Input
                 type="number"
-                min="1"
-                max="30"
                 placeholder="Total Days"
-                name="mentHlth"
+                {...register("mentHlth", {
+                  required: true,
+                  min: { value: 0, message: "Days should be at least 0" },
+                  max: { value: 30, message: "Days should be at most 30" },
+                })}
               />
+
+              {errors.mentHlth && (
+                <Text fontSize="xs" color="red.500" mt="2">
+                  {errors.mentHlth.message}
+                </Text>
+              )}
+
               <Text fontSize="xs" mt="2">
                 Includes stress, depression, and problems with emotions
               </Text>
             </FormTile>
 
-            <FormTile question="For how many days during the past 30 days was your physical health not good?">
+            <FormTile
+              question="For how many days during the past 30 days was your physical health not good?"
+              boxShadow={errors.physHlth ? errorBoxShadow : ""}
+            >
               <Input
                 type="number"
                 min="1"
                 max="30"
                 placeholder="Total Days"
-                name="physHlth"
+                {...register("physHlth", {
+                  required: true,
+                  min: { value: 0, message: "Days should be at least 0" },
+                  max: { value: 30, message: "Days should be at most 30" },
+                })}
               />
+              {errors.physHlth && (
+                <Text fontSize="xs" color="red.500" mt="2">
+                  {errors.physHlth.message}
+                </Text>
+              )}
               <Text fontSize="xs" mt="2">
                 Includes physical illness and injury
               </Text>
