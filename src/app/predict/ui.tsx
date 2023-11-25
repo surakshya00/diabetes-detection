@@ -38,6 +38,10 @@ interface IFormInput {
   physHlth: number;
   anyHealthcare: string;
   noDocBcCost: string;
+  sex: string;
+  age: string;
+  education: string;
+  income: string;
 }
 
 const errorBoxShadow =
@@ -512,19 +516,29 @@ export default function PredictUI() {
             gap={5}
             my="5"
           >
-            <FormTile question="What is you gender?">
-              <RadioGroup name="sex">
+            <FormTile
+              question="What is you gender?"
+              boxShadow={errors.sex ? errorBoxShadow : ""}
+            >
+              <RadioGroup>
                 <Stack>
-                  <Radio value="1">Male</Radio>
-                  <Radio value="0">Female</Radio>
+                  <Radio {...register("sex", { required: true })} value="1">
+                    Male
+                  </Radio>
+                  <Radio {...register("sex", { required: true })} value="0">
+                    Female
+                  </Radio>
                 </Stack>
               </RadioGroup>
             </FormTile>
 
-            <FormTile question="What is your age?">
+            <FormTile
+              question="What is your age?"
+              boxShadow={errors.age ? errorBoxShadow : ""}
+            >
               <Select
-                name="age"
                 placeholder="Pick age group"
+                {...register("age", { required: true })}
                 color="white"
                 sx={{
                   "> option": {
@@ -550,9 +564,12 @@ export default function PredictUI() {
               </Select>
             </FormTile>
 
-            <FormTile question="What is your education Level?">
+            <FormTile
+              question="What is your education Level?"
+              boxShadow={errors.education ? errorBoxShadow : ""}
+            >
               <Select
-                name="education"
+                {...register("education", { required: true })}
                 placeholder="Pick Education Level"
                 sx={{
                   "> option": {
@@ -580,9 +597,12 @@ export default function PredictUI() {
               </Select>
             </FormTile>
 
-            <FormTile question="What is your income?">
+            <FormTile
+              question="What is your income?"
+              boxShadow={errors.income ? errorBoxShadow : ""}
+            >
               <Select
-                name="income"
+                {...register("income", { required: true })}
                 placeholder="Pick Income Level"
                 color="white"
                 sx={{
