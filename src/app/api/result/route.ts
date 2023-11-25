@@ -9,7 +9,7 @@ export async function GET() {
         return Response.json({ message: "user not found" }, { status: 401 });
       }
 
-      if (user.diabetesResult) {
+      if (user.diabetesResult && user.diabetesResult.timestamp) {
         return Response.json({ result: user.diabetesResult });
       }
 
