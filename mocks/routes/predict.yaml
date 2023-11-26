@@ -1,0 +1,22 @@
+- id: predict
+  url: /predict
+  method: POST
+  variants:
+    - id: withDiabetes
+      type: json
+      options:
+        status: 200
+        body:
+          hasDiabetes: true
+    - id: withoutDiabetes
+      type: json
+      options:
+        status: 200
+        body:
+          hasDiabetes: false
+    - id: error
+      type: json
+      options:
+        status: 400
+        body:
+          message: could not perform prediction

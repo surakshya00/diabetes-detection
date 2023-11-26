@@ -1,5 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import { Open_Sans, Ubuntu } from "@next/font/google";
+import { Open_Sans, Ubuntu } from "next/font/google";
 
 const openSans = Open_Sans({ subsets: ["cyrillic"] });
 const ubuntu = Ubuntu({ subsets: ["cyrillic"], weight: ["400", "700"] });

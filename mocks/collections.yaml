@@ -1,0 +1,8 @@
+- id: base
+  routes:
+    - predict:success
+
+- id: error
+  from: base
+  routes:
+    - predict:error
