@@ -35,6 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# ML Models
-**/*.joblib
-**/*.pkl
+# Lambda
+lambda/*.joblib
+lambda/*.pkl
+lambda/layer

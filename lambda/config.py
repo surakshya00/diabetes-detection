@@ -14,7 +14,7 @@ FEATURE_COLUMNS = [
     "veggies",
     "hvyAlcoholConsump",
     "anyHealthcare",
-    "boDocbcCost",
+    "noDocBcCost",
     "genHlth",
     "mentHlth",
     "physHlth",
@@ -25,4 +25,4 @@ FEATURE_COLUMNS = [
     "income",
 ]
 
-PATH_TO_MODEL = ""  # TODO: Pass where the model is located
+PATH_TO_MODEL = "/opt/diabetes-detector.pkl"

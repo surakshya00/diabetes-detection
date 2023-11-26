@@ -15,8 +15,12 @@ def lambda_handler(event, context):
         payload = {"message": "failed to read input features"}
         return make_response(500, payload)
 
-    predictor = Predictor(PATH_TO_MODEL)
-    has_diabetes = predictor.predict(features)
+    try:
+        predictor = Predictor(PATH_TO_MODEL)
+        has_diabetes = predictor.predict(features)
 
-    response = {"hasDiabetes": has_diabetes}
-    return make_response(200, response)
+        response = {"hasDiabetes": has_diabetes}
+        return make_response(200, response)
+    except Exception as ex:
+        print(ex)
+        return make_response(500, {"message": str(ex)})

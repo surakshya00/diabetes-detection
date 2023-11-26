@@ -17,7 +17,7 @@ class Predictor:
 
     def predict(self, features) -> bool:
         result = self.model.predict(np.array([features]))
-        return result[0] == 1
+        return bool(result[0] == 1)
 
 
 if __name__ == "__main__":
