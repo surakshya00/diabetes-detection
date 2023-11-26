@@ -6,7 +6,13 @@ import User from "@/models/User";
 export async function POST(request: Request) {
   return await authenticateUser(async (email: string) => {
     try {
-      const payload = await request.json();
+      let payload;
+      try {
+        payload = await request.json();
+      } catch (e) {
+        throw new InvalidValueError("please provide a valid JSON body");
+      }
+
       const features = parsePayload(payload);
 
       const predictedValue = await predictDiabetes(features);
