@@ -1,8 +1,9 @@
-from random import random
-
+from predictor import Predictor
 from utils import InvalidValueError, make_response, parse_event_for_features
 
+
 _FEATURE_COLUMNS = ["highBP", "highChol"]
+_PATH_TO_MODEL = ""  # TODO: Pass where the model is located
 
 
 def lambda_handler(event, context):
@@ -17,11 +18,8 @@ def lambda_handler(event, context):
         payload = {"message": "failed to read input features"}
         return make_response(500, payload)
 
-    # TODO: Load ML Model from S3
-    print(features)
-
-    # TODO: Infer model using given input features
-    has_diabetes = random() < 0.5
+    predictor = Predictor(_PATH_TO_MODEL)
+    has_diabetes = predictor.predict(features)
 
     response = {"hasDiabetes": has_diabetes}
     return make_response(200, response)
