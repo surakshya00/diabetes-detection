@@ -46,11 +46,12 @@ export async function predictDiabetes(
   if (response) {
     const responseJSON = await response.json();
     if (!response.ok) {
+      console.info(response);
       throw responseJSON?.message || "failed to predict for given features";
     }
 
     return responseJSON.hasDiabetes as boolean;
   }
 
-  throw "failed to predict for given features";
+  throw "no response received from the ML service";
 }
