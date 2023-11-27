@@ -35,6 +35,8 @@ export async function predictDiabetes(
   features: PredictionData
 ): Promise<Boolean> {
   const url = `${ML_SERVER_URL}/predict`;
+
+  console.info("sending request to ML service", url);
   const response = await fetch(url, {
     body: JSON.stringify({ ...features }),
     method: "POST",
@@ -43,6 +45,7 @@ export async function predictDiabetes(
     },
   });
 
+  console.info("got response from ML service");
   if (response) {
     const responseJSON = await response.json();
     if (!response.ok) {
